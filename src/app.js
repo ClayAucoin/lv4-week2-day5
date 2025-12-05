@@ -1,49 +1,27 @@
 // src/app.js
 
 import express from "express"
+import cors from "cors"
+
+// utils
 import supabase from "./utils/supabase.js"
 import { sendError } from "./utils/sendError.js"
 import { config } from "./config.js"
+
 import { requireBody, validateId, validateItemBody, validateAllowedFields } from "./middleware/validators.js"
+
+// routes
+import itemsRouter from "./routes/items.js"
 
 const app = express()
 app.use(express.json())
 
+// use routes
+app.use("/items", itemsRouter)
+
+
 let tableName = "movies_simple"
 // tableName = "movies_simple_test"
-
-// get all items
-app.get("/items", async (req, res, next) => {
-  const { data, error } = await supabase
-    .from(tableName)
-    .select()
-
-  if (error) {
-    return next(sendError(
-      500,
-      "Failed to read data",
-      "READ_ERROR",
-      { underlying: error.message }
-    ))
-  }
-
-  const records = data.length
-  console.log(`GET /items ${records} records`)
-
-  if (records === 0) {
-    return res.status(404).json({
-      ok: true,
-      message: "No items found",
-      data: data
-    })
-  }
-
-  res.status(200).json({
-    ok: true,
-    records: records,
-    data: data
-  })
-})
 
 // add item
 app.post("/items",
