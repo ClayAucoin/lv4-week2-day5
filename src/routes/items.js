@@ -6,15 +6,15 @@ import express from "express";
 import readRouter from "./read.js"
 import findRouter from "./find.js"
 import addRouter from "./add.js"
-// import delRouter from "./del.js"
-// import updateRouter from "./update.js"
+import delRouter from "./del.js"
+import updateRouter from "./update.js"
 
 const itemsRouter = express.Router()
 
 itemsRouter.use("/", readRouter)      // GET /items/
 itemsRouter.use("/", findRouter)      // GET /items/:id
 itemsRouter.use("/", addRouter)       // POST /items/
-// itemsRouter.use("/", delRouter)       // DELETE /items/:id
-// itemsRouter.use("/", updateRouter)    // PUT /items/:id
+itemsRouter.use("/", delRouter)       // DELETE /items/:id
+itemsRouter.use("/", updateRouter)    // PUT /items/:id
 
 export default itemsRouter
