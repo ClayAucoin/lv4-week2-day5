@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 
 let tableName = "movies_simple"
-tableName = "movies_simple_test"
+// tableName = "movies_simple_test"
 
 // get all items
 app.get("/items", async (req, res, next) => {
@@ -116,6 +116,43 @@ app.get("/items/:id",
     })
   })
 
+// delete item by id
+app.delete("/items/:id", validateId, async (req, res, next) => {
+  const id = req.params.id
+  console.log(`DELETE /items/${id}`)
+
+  const { data, error } = await supabase
+    .from(tableName)
+    .delete()
+    .eq("id", id)
+    .select()
+    .maybeSingle()
+
+  if (error) {
+    return next(sendError(
+      500,
+      "Error deleting item",
+      "DELETE_ERROR",
+      { underlying: error.message }
+    ))
+  }
+
+  if (!data) {
+    return next(sendError(
+      404,
+      "Item not found",
+      "NOT_FOUND",
+      { path: req.path, method: req.method }
+    ))
+  }
+
+  res.status(200).json({
+    of: true,
+    records: 1,
+    message: "Item deleted successfully",
+    data: data
+  })
+})
 
 // check for malformed JSON
 app.use((err, req, res, next) => {
