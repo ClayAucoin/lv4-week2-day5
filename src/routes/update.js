@@ -16,7 +16,7 @@ router.put("/:id",
   async (req, res, next) => {
     const id = req.params.id
     const updateItem = req.body
-    console.log(`PUT /items/${id}`)
+    console.log(`PUT /items/${id}`, updateItem)
 
     const { data, error } = await supabase
       .from("movies_simple")

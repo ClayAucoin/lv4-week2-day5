@@ -13,6 +13,7 @@ router.get("/:id",
   async (req, res, next) => {
 
     const id = req.params.id
+    console.log(`GET /items/${id}`)
 
     const { data, error } = await supabase
       .from("movies_simple")
@@ -38,7 +39,6 @@ router.get("/:id",
       ))
     }
 
-    console.log("GET /items/id", id)
     res.status(200).json({
       ok: true,
       records: 1,

@@ -12,6 +12,9 @@ router.get("/", async (req, res, next) => {
     .from("movies_simple")
     .select()
 
+  const records = data.length
+  console.log(`GET /items ${records} records`)
+
   if (error) {
     return next(sendError(
       500,
@@ -20,9 +23,6 @@ router.get("/", async (req, res, next) => {
       { underlying: error.message }
     ))
   }
-
-  const records = data.length
-  console.log(`GET /items ${records} records`)
 
   if (records === 0) {
     return res.status(404).json({

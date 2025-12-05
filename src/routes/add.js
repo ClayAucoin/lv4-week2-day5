@@ -14,13 +14,14 @@ router.post("/",
   validateAllowedFields,
   async (req, res, next) => {
     const newItem = req.body
-    console.log("POST /items", newItem)
 
     const { data, error } = await supabase
       .from("movies_simple")
       .insert(newItem)
       .select()
       .maybeSingle()
+
+    console.log("POST /items", data)
 
     if (error) {
       return next(sendError(

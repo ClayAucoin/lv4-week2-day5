@@ -4,16 +4,15 @@ import express from "express"
 import cors from "cors"
 
 // utils
-import supabase from "./utils/supabase.js"
 import { sendError } from "./utils/sendError.js"
 import { config } from "./config.js"
-
-import { requireBody, validateId, validateItemBody, validateAllowedFields } from "./middleware/validators.js"
 
 // routes
 import itemsRouter from "./routes/items.js"
 
 const app = express()
+
+app.use(cors())
 app.use(express.json())
 
 // use routes
@@ -68,6 +67,5 @@ app.use(error404)
 
 // global error handling
 app.use(globalErrorHandler)
-
 
 export default app
