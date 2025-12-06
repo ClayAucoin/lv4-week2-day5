@@ -37,10 +37,10 @@ This project is a small RESTful API built with Express and Supabase for managing
 ```text
 .
 └── src/
-    ├── app.js              # Express app setup, global error handler, 404 handler
-    ├── config.js           # Loads environment variables and exposes config
-    ├── data-ref.js         # Example movie data shape (reference only)
-    ├── index.js            # Entry point that starts the HTTP server
+    ├── app.js                # Express app setup, global error handler, 404 handler
+    ├── config.js             # Loads environment variables and exposes config
+    ├── data-ref.js           # Example movie data shape (reference only)
+    ├── index.js              # Entry point that starts the HTTP server
     │
     ├── middleware/
     │   └── validators.js     # Request body, ID, and payload validation
