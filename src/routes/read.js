@@ -11,6 +11,7 @@ router.get("/", async (req, res, next) => {
   const { data, error } = await supabase
     .from("movies_simple")
     .select()
+    .order("title")
 
   const records = data.length
   console.log(`GET /items ${records} records`)

@@ -61,7 +61,7 @@ export function validateItemBody(req, res, next) {
   }
 
   // year must be number
-  if (typeof year !== "number") {
+  if (typeof Number(year) !== "number") {
     return next(sendError(
       422,
       `'year' must be a number`,
